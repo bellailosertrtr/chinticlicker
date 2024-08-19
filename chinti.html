@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinti Clicker Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #4caf50;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: white;
+            font-size: 2em;
+            text-transform: uppercase;
+        }
+
+        .container {
+            margin: 50px auto;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #chinti-img {
+            width: 300px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        #chinti-img:active {
+            transform: scale(0.95);
+        }
+
+        #clicks {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+
+        .shop {
+            margin-top: 30px;
+        }
+
+        .shop-item {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .shop-item button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .shop-item button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #4caf50;
+            color: white;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Chinti Clicker Game
+    </header>
+
+    <div class="container">
+        <img id="chinti-img" src="https://cdn1.ntv.com.tr/gorsel/53bhFw_5_kSQrk4laugYew.jpg?width=1000&mode=crop&scale=both" alt="Chinti the Dog">
+        <div id="clicks">0 Clicks</div>
+
+        <div class="shop">
+            <h2>Shop</h2>
+            <div class="shop-item">
+                <span>Double Click Power</span>
+                <button id="double-click" onclick="buyDoubleClick()">Buy for 100 Clicks</button>
+            </div>
+            <div class="shop-item">
+                <span>Auto-Clicker</span>
+                <button id="auto-clicker" onclick="buyAutoClicker()">Buy for 500 Clicks</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Web made by MrDuck
+    </footer>
+
+    <script>
+        let clicks = 0;
+        let clickPower = 1;
+        let autoClickerEnabled = false;
+
+        document.getElementById("chinti-img").addEventListener("click", function() {
+            clicks += clickPower;
+            document.getElementById("clicks").innerText = clicks + " Clicks";
+            updateShop();
+        });
+
+        function buyDoubleClick() {
+            if (clicks >= 100) {
+                clicks -= 100;
+                clickPower = 2;
+                document.getElementById("double-click").disabled = true;
+                updateShop();
+            }
+        }
+
+        function buyAutoClicker() {
+            if (clicks >= 500) {
+                clicks -= 500;
+                autoClickerEnabled = true;
+                document.getElementById("auto-clicker").disabled = true;
+                setInterval(() => {
+                    clicks += clickPower;
+                    document.getElementById("clicks").innerText = clicks + " Clicks";
+                    updateShop();
+                }, 1000);
+            }
+        }
+
+        function updateShop() {
+            document.getElementById("double-click").disabled = clicks < 100 || clickPower > 1;
+            document.getElementById("auto-clicker").disabled = clicks < 500 || autoClickerEnabled;
+        }
+    </script>
+</body>
+</html>
