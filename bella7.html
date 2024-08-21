@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonk Bella the Wolf</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .bonk-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        #bella {
+            width: 100%;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        #hammer {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 100px;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .bonk-count {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+
+        .credits {
+            font-size: 1rem;
+            margin-top: 20px;
+            text-align: center;
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bonk Bella the Wolf</h1>
+    <div class="bonk-container">
+        <img id="bella" src="https://static.wikia.nocookie.net/youtube/images/2/2b/Bella_The_Wolf.jpg/revision/latest?cb=20240728025229" alt="Bella the Wolf">
+        <img id="hammer" src="https://www.vhv.rs/dpng/d/489-4895320_transparent-bonk-clipart-explosion-comic-book-png-png.png" alt="Bonk Hammer">
+    </div>
+    <div class="bonk-count">Bonks: <span id="count">0</span></div>
+    <div class="credits">
+        Website MrDuck. Tarafından yapıldı<br> 
+        Can demir abi eklersen sevinirim dc:scripter_duck<br> 
+        Sunucunda MrDuck. Diğe aratırsan bulabilirsin beni.<br> 
+        İnsanlara beleş web sitesi tasarlıyorum.
+    </div>
+
+    <script>
+        const bella = document.getElementById('bella');
+        const hammer = document.getElementById('hammer');
+        const countDisplay = document.getElementById('count');
+        let bonkCount = 0;
+
+        bella.addEventListener('click', () => {
+            bonkCount++;
+            countDisplay.textContent = bonkCount;
+
+            hammer.style.opacity = 1;
+            hammer.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+            bella.style.transform = 'scale(0.95)';
+
+            setTimeout(() => {
+                hammer.style.opacity = 0;
+                hammer.style.transform = 'translate(-50%, -50%) rotate(-30deg)';
+                bella.style.transform = 'scale(1)';
+            }, 200);
+        });
+    </script>
+</body>
+</html>
